@@ -1,0 +1,66 @@
+
+1. Bot Task Management
+
+Fitur:
+/add_task <deskripsi> untuk menambah tugas baru.
+INSERT INTO tasks(description)VALUES('tes')
+/list_tasks untuk menampilkan semua daftar tugas.
+SELECT * FROM tasks;
+/pending_task menampilkan pending task
+SELECT * FROM tasks WHERE status = false
+/show_task <task_id> menampilkan 1 id
+SELECT * FROM tasks WHERE id = 1
+/done <task_id> untuk menandai tugas sebagai selesai.
+UPDATE tasks SET status = true where id = 1
+
+Database SQL:
+Tabel: tasks
+Kolom: id, description, status (pending/done), created_at.
+CREATE TABLE tasks (
+  id INT PRIMARY KEY NOT NULL ,
+  description VARCHAR(255) NOT NULL,
+  status boolean not null default 0 ,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+
+2. Bot Absensi Karyawan/Teman
+Fungsi: Bot mencatat absensi harian berdasarkan perintah pengguna.
+Fitur:
+
+/checkin untuk mencatat kehadiran.
+INSERT INTO attendance (user_id) VALUES(1)
+
+/checkout untuk mencatat waktu pulang.
+UPDATE attendance SET checkout_time = CURRENT_TIMESTAMP 
+WHERE user_id = 1 AND date = CURRENT_DATE
+
+
+/attendance untuk melihat laporan absensi.
+SELECT * FROM attendance
+
+Database SQL:
+Tabel: attendance
+Kolom: id, user_id, checkin_time, checkout_time, date.
+CREATE TABLE attendance (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    checkin_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    checkout_time TIMESTAMP DEFAULT NULL,
+    date DATE DEFAULT CURRENT_DATE
+);
+
+
+
+add_task - tambahkan <deskripsi> untuk menambah tugas baru.
+list_tasks - untuk menampilkan semua daftar tugas. 
+pending_task - menampilkan pending task 
+show_task - <task_id> menampilkan 1 id 
+done - tambahkan <task_id> untuk menandai tugas sebagai selesai. 
+checkin - <id> untuk mencatat kehadiran. 
+checkout - <id> untuk mencatat waktu pulang.
+attendance - untuk melihat seluruh laporan absensi.
+download_video - download video yotube
+start - untuk memulai bot 
+help - memanggil bantuan 
+
